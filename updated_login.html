@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Giriş Sayfası</h1>
+    </header>
+    <form id="loginForm">
+        <label for="username">Kullanıcı Adı:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Şifre:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Giriş Yap</button>
+    </form>
+    <button id="googleSignIn">Google ile Giriş Yap</button>
+
+    <script>
+      // Firebase configuration
+      var firebaseConfig = {
+        apiKey: "API_KEY",
+        authDomain: "PROJECT_ID.firebaseapp.com",
+        projectId: "PROJECT_ID",
+        storageBucket: "PROJECT_ID.appspot.com",
+        messagingSenderId: "SENDER_ID",
+        appId: "APP_ID"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // Google Sign-In
+      var provider = new firebase.auth.GoogleAuthProvider();
+      document.getElementById('googleSignIn').addEventListener('click', function() {
+        firebase.auth()
+          .signInWithPopup(provider)
+          .then((result) => {
+            // Google user info
+            var user = result.user;
+            // Redirect or show user info
+          }).catch((error) => {
+            // Handle Errors
+          });
+      });
+    </script>
+</body>
+</html>
